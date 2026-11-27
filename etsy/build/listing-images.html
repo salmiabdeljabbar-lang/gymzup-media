@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "Fredoka"; src: url("node_modules/@fontsource/fredoka/files/fredoka-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Caveat"; src: url("node_modules/@fontsource/caveat/files/caveat-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "DM Sans"; src: url("node_modules/@fontsource/dm-sans/files/dm-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #fff; font-family: "DM Sans", sans-serif; color: #5a0f24; }
+.img { width: 2000px; height: 1500px; position: relative; overflow: hidden; background: #f9d9df; }
+.sheet { position: absolute; background: #fff; box-shadow: 0 30px 60px rgba(90,15,36,.22), 0 6px 14px rgba(90,15,36,.12); }
+.sheet img { width: 100%; display: block; }
+.title { font-family: "Fredoka"; font-weight: 600; color: #b3123a; line-height: .95; }
+.script { font-family: "Caveat"; font-weight: 600; color: #5a0f24; }
+.badge { position: absolute; background: #b3123a; color: #fff; font-family: "Fredoka"; font-weight: 600; border-radius: 999px; padding: 18px 40px; font-size: 44px; letter-spacing: .02em; }
+.pill { display: inline-block; background: #fff; color: #b3123a; border: 4px solid #b3123a; border-radius: 999px; padding: 10px 30px; font-family: "Fredoka"; font-weight: 600; font-size: 40px; }
+.heart { position: absolute; fill: #f4a7b6; opacity: .7; }
+ul.inc { list-style: none; display: grid; gap: 26px; font-size: 46px; }
+ul.inc li { display: flex; gap: 24px; align-items: center; }
+ul.inc li::before { content: ""; width: 34px; height: 34px; flex: none; border-radius: 50%; background: #b3123a; box-shadow: inset 0 0 0 9px #fff, 0 0 0 4px #b3123a; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 60px; }
+.step { background: #fff; border-radius: 40px; padding: 60px 50px; display: grid; gap: 24px; align-content: start; box-shadow: 0 20px 40px rgba(90,15,36,.12); }
+.step b { font-family: "Fredoka"; font-weight: 600; font-size: 110px; color: #b3123a; line-height: 1; }
+.step h3 { font-family: "Fredoka"; font-weight: 600; font-size: 56px; color: #5a0f24; }
+.step p { font-size: 36px; line-height: 1.35; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs><path id="h" d="M12 21s-7.5-4.6-10-9.3C.4 8.4 2.2 4.5 6 4.5c2.2 0 3.6 1.3 6 3.6 2.4-2.3 3.8-3.6 6-3.6 3.8 0 5.6 3.9 4 7.2C19.5 16.4 12 21 12 21z"/></defs></svg>
+
+<!-- 1: thumbnail -->
+<section class="img" id="i1">
+  <svg class="heart" viewBox="0 0 24 24" style="width:120px;left:90px;top:1180px;transform:rotate(-15deg)"><use href="#h"/></svg>
+  <svg class="heart" viewBox="0 0 24 24" style="width:80px;left:860px;top:90px;transform:rotate(12deg)"><use href="#h"/></svg>
+  <div style="position:absolute;left:120px;top:250px;width:820px;display:grid;gap:40px">
+    <div class="script" style="font-size:80px">printable</div>
+    <div class="title" style="font-size:165px">Love<br>Coupons</div>
+    <div style="font-family:Fredoka;font-weight:600;font-size:62px;color:#5a0f24">for Him or Her</div>
+    <div style="display:flex;gap:20px;flex-wrap:wrap;margin-top:10px"><span class="pill">15 coupons</span><span class="pill">Instant PDF</span></div>
+  </div>
+  <div class="sheet" style="width:640px;left:1230px;top:170px;transform:rotate(7deg)"><img src="out/love-coupons/pages/page-4.png"></div>
+  <div class="sheet" style="width:640px;left:1060px;top:230px;transform:rotate(-3deg)"><img src="out/love-coupons/pages/page-3.png"></div>
+  <div class="sheet" style="width:560px;left:960px;top:430px;transform:rotate(-11deg)"><img src="out/love-coupons/pages/page-1.png"></div>
+</section>
+
+<!-- 2: what's included -->
+<section class="img" id="i2" style="background:#fff8f4">
+  <div style="position:absolute;left:120px;top:300px;width:820px;display:grid;gap:60px">
+    <div class="title" style="font-size:120px">What's<br>included</div>
+    <ul class="inc">
+      <li>Cover page with To / From</li>
+      <li>12 ready-made love coupons</li>
+      <li>3 blank coupons for your ideas</li>
+      <li>How-to page</li>
+      <li>US Letter + A4 PDF</li>
+    </ul>
+  </div>
+  <div style="position:absolute;right:110px;top:260px;display:grid;grid-template-columns:repeat(3,300px);gap:30px">
+    <div class="sheet" style="position:relative;width:300px"><img src="out/love-coupons/pages/page-1.png"></div>
+    <div class="sheet" style="position:relative;width:300px"><img src="out/love-coupons/pages/page-2.png"></div>
+    <div class="sheet" style="position:relative;width:300px"><img src="out/love-coupons/pages/page-3.png"></div>
+    <div class="sheet" style="position:relative;width:300px"><img src="out/love-coupons/pages/page-4.png"></div>
+    <div class="sheet" style="position:relative;width:300px"><img src="out/love-coupons/pages/page-5.png"></div>
+    <div class="sheet" style="position:relative;width:300px"><img src="out/love-coupons/pages/page-7.png"></div>
+  </div>
+</section>
+
+<!-- 3: coupon close-up -->
+<section class="img" id="i3">
+  <div style="position:absolute;left:0;right:0;top:110px;text-align:center" class="title"><span style="font-size:110px">Sweet, fun & thoughtful</span></div>
+  <div class="script" style="position:absolute;left:0;right:0;top:250px;text-align:center;font-size:64px">a gift they'll actually use</div>
+  <div class="sheet" style="width:1500px;left:250px;top:400px;height:1000px;overflow:hidden;border-radius:20px"><img src="out/love-coupons/pages/page-5.png" style="margin-top:-40px"></div>
+</section>
+
+<!-- 4: how it works -->
+<section class="img" id="i4" style="background:#fff8f4">
+  <div style="position:absolute;left:120px;right:120px;top:300px;display:grid;gap:90px">
+    <div class="title" style="font-size:120px;text-align:center">Ready in 3 easy steps</div>
+    <div class="steps">
+      <div class="step"><b>1</b><h3>Download</h3><p>Get your PDF instantly from Etsy: Purchases → Download Files.</p></div>
+      <div class="step"><b>2</b><h3>Print & cut</h3><p>Print at home on card stock and cut along the dashed lines.</p></div>
+      <div class="step"><b>3</b><h3>Gift it</h3><p>Fill in the names, staple into a little book and surprise your Valentine.</p></div>
+    </div>
+    <div style="text-align:center;font-size:40px">Digital download · No physical item will be shipped</div>
+  </div>
+</section>
+
+<!-- 5: blank coupons -->
+<section class="img" id="i5">
+  <div style="position:absolute;left:120px;top:300px;width:760px;display:grid;gap:40px">
+    <div class="title" style="font-size:120px">Make it personal</div>
+    <div style="font-size:50px;line-height:1.4">3 blank coupons to write your own ideas: inside jokes, favorite places, anything that's just yours.</div>
+  </div>
+  <div class="sheet" style="width:820px;left:1050px;top:120px;transform:rotate(4deg)"><img src="out/love-coupons/pages/page-7.png"></div>
+</section>
+</body>
+</html>

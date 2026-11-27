@@ -1,3 +1,4 @@
 etsy/.etsy_tokens.json
 .env
 __pycache__/
+node_modules/

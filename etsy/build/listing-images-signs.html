@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Montserrat", sans-serif; color: #2f2d29; }
+.img { width: 2000px; height: 1500px; position: relative; overflow: hidden; background: #e9e0d3; }
+.frame { position: absolute; background: #3a362f; padding: 22px; box-shadow: 0 30px 60px rgba(47,45,41,.28); }
+.frame .mat { background: #fff; padding: 26px; }
+.frame img { width: 100%; display: block; }
+.sheet { position: absolute; background: #fff; box-shadow: 0 30px 60px rgba(47,45,41,.22); }
+.sheet img { width: 100%; display: block; }
+.serif { font-family: "Cormorant Garamond", serif; font-weight: 500; line-height: .95; }
+.eyebrow { font-size: 30px; letter-spacing: .3em; text-transform: uppercase; color: #6b6f58; font-weight: 600; }
+.pill { display: inline-block; border: 3px solid #2f2d29; border-radius: 999px; padding: 12px 32px; font-size: 32px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.pill.dark { background: #6b6f58; border-color: #6b6f58; color: #fff; }
+ul.inc { list-style: none; display: grid; gap: 22px; font-size: 36px; }
+ul.inc li { display: flex; gap: 22px; align-items: center; }
+ul.inc li::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: #6b6f58; flex: none; }
+/* banner */
+.banner { width: 3360px; height: 840px; position: relative; overflow: hidden; background: #f6f1ea; }
+</style>
+</head>
+<body>
+<!-- SIGNS 1 -->
+<section class="img" id="s1">
+  <div style="position:absolute;left:110px;top:380px;width:720px;display:grid;gap:40px">
+    <div class="eyebrow">Editable · Printable</div>
+    <div class="serif" style="font-size:150px">Host Signs<br>Bundle</div>
+    <div class="serif" style="font-size:54px;font-style:italic;color:#6e675d">8 signs for your rental</div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap"><span class="pill dark">Edit in Canva</span><span class="pill">8 × 10 in</span></div>
+  </div>
+  <div class="frame" style="width:470px;left:860px;top:420px;transform:rotate(-3deg)"><div class="mat"><img src="out/signs/pages/page-2.png"></div></div>
+  <div class="frame" style="width:520px;left:1230px;top:300px"><div class="mat"><img src="out/signs/pages/page-4.png"></div></div>
+  <div class="frame" style="width:470px;left:1620px;top:450px;transform:rotate(3deg)"><div class="mat"><img src="out/signs/pages/page-3.png"></div></div>
+</section>
+<!-- SIGNS 2 -->
+<section class="img" id="s2" style="background:#f6f1ea">
+  <div style="position:absolute;left:0;right:0;top:80px;text-align:center;display:grid;gap:18px"><div class="eyebrow">What's included</div><div class="serif" style="font-size:96px">8 essential signs</div></div>
+  <div style="position:absolute;left:150px;right:150px;top:330px;display:grid;grid-template-columns:repeat(4,1fr);gap:40px">
+    ${GRID}
+  </div>
+</section>
+<!-- BUNDLE 1 -->
+<section class="img" id="b1">
+  <div style="position:absolute;left:110px;top:230px;width:760px;display:grid;gap:36px">
+    <div class="eyebrow">Best value · Save $7</div>
+    <div class="serif" style="font-size:140px">Host<br>Starter<br>Bundle</div>
+    <div style="font-size:36px;line-height:1.5;color:#6e675d">Welcome book · Cleaning checklist · 8 host signs</div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap"><span class="pill dark">28 pages</span><span class="pill">Canva + PDF</span></div>
+  </div>
+  <div class="sheet" style="width:520px;left:1390px;top:150px;transform:rotate(7deg)"><img src="out/cleaning/pages/page-1.png"></div>
+  <div class="frame" style="width:440px;left:1450px;top:640px;transform:rotate(-2deg)"><div class="mat"><img src="out/signs/pages/page-2.png"></div></div>
+  <div class="sheet" style="width:560px;left:930px;top:300px;transform:rotate(-5deg)"><img src="out/welcome-book/pages/page-1.png"></div>
+</section>
+<!-- BUNDLE 2 -->
+<section class="img" id="b2" style="background:#f6f1ea">
+  <div style="position:absolute;left:110px;top:200px;width:700px;display:grid;gap:44px">
+    <div class="serif" style="font-size:96px">Everything a host needs</div>
+    <ul class="inc"><li>12-page editable welcome book</li><li>8-page turnover cleaning checklist</li><li>8 editable host signs</li><li>US Letter + A4 PDF</li><li>Canva template links</li></ul>
+    <div style="font-size:34px;color:#6e675d">Separately $26.97 · Bundle $18.99</div>
+  </div>
+  <div style="position:absolute;right:100px;top:200px;display:grid;grid-template-columns:repeat(3,330px);gap:30px">
+    <div class="sheet" style="position:relative"><img src="out/welcome-book/pages/page-1.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/welcome-book/pages/page-5.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/welcome-book/pages/page-9.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/cleaning/pages/page-3.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/signs/pages/page-4.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/signs/pages/page-3.png"></div>
+  </div>
+</section>
+<!-- SHOP BANNER 3360x840 -->
+<section class="banner" id="banner">
+  <div style="position:absolute;left:200px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center;gap:30px;width:1700px">
+    <div class="eyebrow" style="font-size:40px">Nestly ST Host</div>
+    <div class="serif" style="font-size:150px">Templates & checklists<br>for short term rental hosts</div>
+    <div style="font-size:42px;color:#6e675d;letter-spacing:.04em">Welcome books · Cleaning checklists · Host signs · Edit in Canva</div>
+  </div>
+  <div class="sheet" style="width:420px;left:2200px;top:120px;transform:rotate(-6deg)"><img src="out/welcome-book/pages/page-1.png"></div>
+  <div class="sheet" style="width:420px;left:2560px;top:90px;transform:rotate(2deg)"><img src="out/cleaning/pages/page-3.png"></div>
+  <div class="frame" style="width:330px;left:2930px;top:170px;transform:rotate(6deg);padding:16px"><div class="mat" style="padding:18px"><img src="out/signs/pages/page-2.png"></div></div>
+</section>
+<script>
+const s = document.getElementById("s2");
+s.innerHTML = s.innerHTML.replace("${GRID}", Array.from({ length: 8 }, (_, i) => `<div class="sheet" style="position:relative"><img src="out/signs/pages/page-${i + 1}.png"></div>`).join(""));
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Host Signs Bundle</title>
+<style>
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+:root { --paper: #f6f1ea; --sand: #e9e0d3; --stone: #cbbfae; --olive: #6b6f58; --ink: #2f2d29; --soft: #6e675d; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Montserrat", sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: var(--pw); height: var(--ph); position: relative; overflow: hidden; page-break-after: always; background: var(--paper); display: grid; place-items: center; }
+.page:last-child { page-break-after: auto; }
+.sign { width: 8in; height: 10in; max-width: calc(var(--pw) - .3in); background: var(--paper); position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .28in; padding: .8in .75in; }
+.sign::before { content: ""; position: absolute; inset: .35in; border: 1.5px solid var(--olive); }
+.sign::after { content: ""; position: absolute; inset: .45in; border: .75px solid var(--stone); }
+.sign > * { position: relative; z-index: 1; }
+.eyebrow { font-size: 10pt; letter-spacing: .38em; text-transform: uppercase; color: var(--olive); font-weight: 600; }
+h1 { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: 64pt; line-height: .95; }
+.serif-i { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 500; font-size: 20pt; color: var(--soft); }
+.rule { width: .7in; height: 1.5px; background: var(--olive); }
+.lbl { font-size: 9pt; letter-spacing: .3em; text-transform: uppercase; color: var(--olive); font-weight: 600; }
+.val { font-family: "Cormorant Garamond", serif; font-size: 34pt; font-weight: 500; line-height: 1.05; }
+.qr { width: 1.7in; height: 1.7in; background: #fff; border: 1.5px dashed var(--stone); display: grid; place-items: center; font-size: 8pt; letter-spacing: .18em; text-transform: uppercase; color: var(--soft); }
+ul.list { list-style: none; display: grid; gap: .17in; text-align: left; width: 100%; max-width: 5.4in; }
+ul.list li { display: grid; grid-template-columns: .45in 1fr; align-items: baseline; font-size: 12.5pt; line-height: 1.45; color: var(--ink); }
+ul.list li b { font-family: "Cormorant Garamond", serif; font-size: 20pt; font-weight: 500; color: var(--olive); }
+ul.ck li::before { content: ""; width: .17in; height: .17in; border: 1.5px solid var(--olive); border-radius: 2px; transform: translateY(.03in); }
+ul.ck li { grid-template-columns: .45in 1fr; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: .4in; width: 100%; max-width: 5.4in; }
+.pair div { display: grid; gap: .06in; }
+.small { font-size: 11pt; line-height: 1.6; color: var(--soft); max-width: 5in; }
+.icon { width: .9in; height: .9in; stroke: var(--olive); fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const size = new URLSearchParams(location.search).get("size") || "letter";
+document.documentElement.style.setProperty("--pw", size === "a4" ? "210mm" : "8.5in");
+document.documentElement.style.setProperty("--ph", size === "a4" ? "297mm" : "11in");
+const st = document.createElement("style");
+st.textContent = `@page { size: ${size === "a4" ? "A4" : "Letter"}; margin: 0; }`;
+document.head.appendChild(st);
+
+const I = {
+  wifi: `<svg class="icon" viewBox="0 0 48 48"><path d="M6 19a26 26 0 0 1 36 0"/><path d="M12 26a17 17 0 0 1 24 0"/><path d="M18 33a8 8 0 0 1 12 0"/><circle cx="24" cy="39" r="1.6" fill="currentColor"/></svg>`,
+  key: `<svg class="icon" viewBox="0 0 48 48"><circle cx="16" cy="24" r="8"/><path d="M24 24h18M36 24v6M41 24v5"/></svg>`,
+  leaf: `<svg class="icon" viewBox="0 0 48 48"><path d="M10 38c0-16 10-26 28-28 0 18-10 28-26 28z"/><path d="M10 38 28 20"/></svg>`,
+  moon: `<svg class="icon" viewBox="0 0 48 48"><path d="M34 32A14 14 0 0 1 20 12a14 14 0 1 0 14 20z"/></svg>`,
+  shoe: `<svg class="icon" viewBox="0 0 48 48"><path d="M6 32V20l8 2 4 6 14 2c6 1 10 3 10 6v2H6z"/><path d="M6 32h36"/></svg>`,
+  home: `<svg class="icon" viewBox="0 0 48 48"><path d="M8 22 24 9l16 13"/><path d="M12 19v20h24V19"/><path d="M21 39V28h6v11"/></svg>`,
+};
+const sign = (body) => `<section class="page"><div class="sign">${body}</div></section>`;
+const pages = [
+  sign(`${I.home}<div class="eyebrow">The Olive House</div><h1>Welcome</h1><div class="rule"></div><div class="serif-i">We're so glad you're here.<br>Make yourself at home.</div>`),
+  sign(`${I.wifi}<div class="eyebrow">Stay connected</div><h1>Wi-Fi</h1><div class="rule"></div>
+    <div><div class="lbl">Network</div><div class="val">OliveHouse_Guest</div></div>
+    <div><div class="lbl">Password</div><div class="val">welcome2026</div></div>
+    <div class="qr">Add QR code</div>`),
+  sign(`<div class="eyebrow">Please respect our home</div><h1>House Rules</h1><div class="rule"></div>
+    <ul class="list">${["No smoking or vaping", "No parties or events", "Quiet hours 10 PM to 8 AM", "Maximum 6 guests", "No pets without approval", "Please treat our home as your own"].map((x, i) => `<li><b>${String(i + 1).padStart(2, "0")}</b>${x}</li>`).join("")}</ul>`),
+  sign(`${I.key}<div class="eyebrow">Before you go</div><h1>Check-out</h1><div class="serif-i">by 11:00 AM</div><div class="rule"></div>
+    <ul class="list ck">${["Load and start the dishwasher", "Take out all trash", "Place used towels in the tub", "Turn off lights and AC", "Lock windows and doors", "Leave keys on the counter"].map(x => `<li>${x}</li>`).join("")}</ul>`),
+  sign(`<div class="eyebrow">Arrival & departure</div><h1>Check-in<br>& Check-out</h1><div class="rule"></div>
+    <div class="pair"><div><div class="lbl">Check-in</div><div class="val">3:00 PM</div></div><div><div class="lbl">Check-out</div><div class="val">11:00 AM</div></div></div>
+    <p class="small">Need an early arrival or late departure? Just message us and we'll do our best.</p>`),
+  sign(`${I.leaf}<div class="eyebrow">Help us keep it clean</div><h1>Trash &<br>Recycling</h1><div class="rule"></div>
+    <div class="pair"><div><div class="lbl">Trash</div><p class="small">Bagged, in the gray bin by the garage</p></div><div><div class="lbl">Recycling</div><p class="small">Rinsed, in the blue bin. No bags please</p></div></div>
+    <p class="small">Pickup day: Tuesday morning</p>`),
+  sign(`${I.moon}<div class="eyebrow">Be a good neighbor</div><h1>Quiet Hours</h1><div class="serif-i">10:00 PM to 8:00 AM</div><div class="rule"></div><p class="small">Our neighbors are lovely and we'd like to keep it that way. Thank you for keeping the noise down at night.</p>`),
+  sign(`${I.shoe}<div class="eyebrow">Thank you</div><h1>Please Remove<br>Your Shoes</h1><div class="rule"></div><div class="serif-i">It helps us keep the floors<br>clean for you</div>`),
+];
+document.getElementById("root").innerHTML = pages.join("");
+</script>
+</body>
+</html>

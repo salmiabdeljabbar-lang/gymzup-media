@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Montserrat", sans-serif; color: #2f2d29; }
+.img { width: 2000px; height: 1500px; position: relative; overflow: hidden; background: #e9e0d3; }
+.sheet { position: absolute; background: #fff; box-shadow: 0 30px 60px rgba(47,45,41,.22), 0 6px 14px rgba(47,45,41,.1); }
+.sheet img { width: 100%; display: block; }
+.serif { font-family: "Cormorant Garamond", serif; font-weight: 500; line-height: .95; }
+.eyebrow { font-size: 30px; letter-spacing: .3em; text-transform: uppercase; color: #6b6f58; font-weight: 600; }
+.pill { display: inline-block; border: 3px solid #2f2d29; border-radius: 999px; padding: 12px 32px; font-size: 32px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.pill.dark { background: #6b6f58; border-color: #6b6f58; color: #fff; }
+ul.inc { list-style: none; display: grid; gap: 22px; font-size: 36px; }
+ul.inc li { display: flex; gap: 22px; align-items: center; }
+ul.inc li::before { content: ""; width: 26px; height: 26px; border: 3px solid #6b6f58; border-radius: 4px; flex: none; }
+</style>
+</head>
+<body>
+<section class="img" id="x1">
+  <div style="position:absolute;left:120px;top:240px;width:800px;display:grid;gap:40px">
+    <div class="eyebrow">Printable · STR hosts</div>
+    <div class="serif" style="font-size:150px">Cleaning<br>Checklist</div>
+    <div class="serif" style="font-size:56px;font-style:italic;color:#6e675d">room-by-room turnover guide</div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap"><span class="pill dark">8 pages</span><span class="pill">95+ tasks</span></div>
+  </div>
+  <div class="sheet" style="width:560px;left:1380px;top:150px;transform:rotate(6deg)"><img src="out/cleaning/pages/page-4.png"></div>
+  <div class="sheet" style="width:580px;left:1170px;top:230px;transform:rotate(1deg)"><img src="out/cleaning/pages/page-3.png"></div>
+  <div class="sheet" style="width:580px;left:950px;top:320px;transform:rotate(-6deg)"><img src="out/cleaning/pages/page-1.png"></div>
+</section>
+<section class="img" id="x2" style="background:#f6f1ea">
+  <div style="position:absolute;left:110px;top:220px;display:grid;gap:50px;width:700px">
+    <div class="serif" style="font-size:100px">Never miss a step again</div>
+    <ul class="inc"><li>Arrival, laundry & outdoor</li><li>Kitchen</li><li>Bathrooms</li><li>Bedrooms & living room</li><li>Final walk-through + low supplies</li><li>Damage & maintenance report</li><li>Monthly cleaning log</li></ul>
+  </div>
+  <div style="position:absolute;right:90px;top:170px;display:grid;grid-template-columns:repeat(4,250px);gap:24px">
+    <div class="sheet" style="position:relative"><img src="out/cleaning/pages/page-1.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/cleaning/pages/page-2.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/cleaning/pages/page-3.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/cleaning/pages/page-4.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/cleaning/pages/page-5.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/cleaning/pages/page-6.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/cleaning/pages/page-7.png"></div>
+    <div class="sheet" style="position:relative"><img src="out/cleaning/pages/page-8.png"></div>
+  </div>
+</section>
+<section class="img" id="x3">
+  <div style="position:absolute;left:0;right:0;top:100px;text-align:center;display:grid;gap:20px"><div class="eyebrow">Consistent cleans · better reviews</div><div class="serif" style="font-size:96px">Hand it to any cleaner</div></div>
+  <div class="sheet" style="width:1500px;left:250px;top:380px;height:1050px;overflow:hidden"><img src="out/cleaning/pages/page-4.png" style="margin-top:-80px"></div>
+</section>
+</body>
+</html>

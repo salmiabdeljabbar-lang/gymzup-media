@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Turnover Cleaning Checklist</title>
+<style>
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+:root { --paper: #f6f1ea; --sand: #e9e0d3; --stone: #cbbfae; --olive: #6b6f58; --ink: #2f2d29; --soft: #6e675d; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Montserrat", sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: var(--pw); height: var(--ph); position: relative; overflow: hidden; page-break-after: always; background: #fff; padding: .6in .65in .65in; display: flex; flex-direction: column; gap: .2in; }
+.page:last-child { page-break-after: auto; }
+.top { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1.5px solid var(--ink); padding-bottom: .12in; }
+.eyebrow { font-size: 7.5pt; letter-spacing: .3em; text-transform: uppercase; color: var(--olive); font-weight: 600; }
+h1, h2 { font-family: "Cormorant Garamond", serif; font-weight: 500; line-height: 1; }
+h2 { font-size: 36pt; }
+.meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: .25in; }
+.meta div { display: flex; align-items: flex-end; gap: 8px; font-size: 7.5pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; color: var(--soft); }
+.meta i { flex: 1; border-bottom: 1px solid var(--stone); height: 1.2em; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: .22in .35in; align-content: start; }
+.sec { display: grid; gap: .06in; align-content: start; }
+.sec h3 { font-size: 8.5pt; letter-spacing: .22em; text-transform: uppercase; font-weight: 600; background: var(--paper); padding: .07in .12in; color: var(--ink); }
+ul.ck { list-style: none; display: grid; gap: 0; }
+ul.ck li { display: grid; grid-template-columns: .26in 1fr; align-items: start; font-size: 9.5pt; line-height: 1.35; padding: .055in 0 .055in .04in; border-bottom: 1px solid var(--sand); color: var(--ink); }
+ul.ck li::before { content: ""; width: .13in; height: .13in; border: 1.3px solid var(--olive); border-radius: 2px; margin-top: .1em; }
+.notes { flex: 1; display: flex; flex-direction: column; gap: .06in; margin-top: .1in; }
+.notes h3 { font-size: 8pt; letter-spacing: .22em; text-transform: uppercase; font-weight: 600; color: var(--soft); }
+.notes .lines { flex: 1; background: repeating-linear-gradient(to bottom, transparent 0, transparent .29in, var(--sand) .29in, var(--sand) calc(.29in + 1px)); }
+.foot { position: absolute; bottom: .3in; left: .65in; right: .65in; display: flex; justify-content: space-between; font-size: 7pt; letter-spacing: .2em; text-transform: uppercase; color: var(--stone); }
+/* tables */
+table { width: 100%; border-collapse: collapse; font-size: 9pt; }
+th { text-align: left; font-size: 7.5pt; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; background: var(--paper); padding: .08in .1in; }
+td { border-bottom: 1px solid var(--sand); padding: 0 .1in; height: .34in; color: var(--ink); }
+td.c, th.c { width: .95in; white-space: nowrap; }
+/* cover */
+.cover { background: var(--paper); justify-content: center; align-items: center; text-align: center; gap: .25in; }
+.cover h1 { font-size: 72pt; }
+.cover .serif-i { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 22pt; color: var(--soft); }
+.cover .box { margin-top: .3in; background: #fff; padding: .35in .5in; text-align: left; display: grid; gap: .12in; max-width: 5.6in; }
+.cover .box p { font-size: 10pt; line-height: 1.7; color: var(--soft); }
+.cover .box b { color: var(--ink); font-weight: 600; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const size = new URLSearchParams(location.search).get("size") || "letter";
+document.documentElement.style.setProperty("--pw", size === "a4" ? "210mm" : "8.5in");
+document.documentElement.style.setProperty("--ph", size === "a4" ? "297mm" : "11in");
+const st = document.createElement("style");
+st.textContent = `@page { size: ${size === "a4" ? "A4" : "Letter"}; margin: 0; }`;
+document.head.appendChild(st);
+
+let n = 1;
+const foot = () => `<div class="foot"><span>Turnover Cleaning Checklist</span><span>${String(++n).padStart(2, "0")}</span></div>`;
+const meta = `<div class="meta"><div>Property<i></i></div><div>Date<i></i></div><div>Cleaner<i></i></div></div>`;
+const header = (eyebrow, title) => `<div class="top"><div><div class="eyebrow">${eyebrow}</div><h2>${title}</h2></div><div class="eyebrow">Next check-in: ________</div></div>`;
+const sec = (title, items) => `<div class="sec"><h3>${title}</h3><ul class="ck">${items.map(i => `<li>${i}</li>`).join("")}</ul></div>`;
+const notes = `<div class="notes"><h3>Notes & issues</h3><div class="lines"></div></div>`;
+
+const pages = [];
+pages.push(`<section class="page cover">
+  <div class="eyebrow">For short term rental hosts & cleaners</div>
+  <h1>Turnover<br>Cleaning<br>Checklist</h1>
+  <div class="serif-i">every room, every stay, five-star ready</div>
+  <div class="box">
+    <p><b>How to use:</b> print one set per turnover, or open it on a tablet. Work room by room and tick each task. Note anything broken, missing or low on the report pages, then send a photo to the host.</p>
+    <p><b>Tip:</b> clean top to bottom and back to front. Start laundry first so it finishes while you clean.</p>
+  </div></section>`);
+
+pages.push(`<section class="page">${header("Start here", "Arrival & laundry")}${meta}
+  <div class="cols">
+    ${sec("On arrival", ["Take photos of each room before cleaning", "Check for damage or missing items", "Open windows to air out the space", "Start the first load of laundry", "Collect all trash from every room", "Check guest left items, set aside"])}
+    ${sec("Laundry", ["Strip all beds, including mattress protectors if soiled", "Collect all used towels and bath mats", "Wash kitchen towels and cloths", "Check linens for stains or damage", "Dry, fold and store fresh linens", "Restart dishwasher if needed"])}
+    ${sec("Entry & hallway", ["Wipe front door, handle and keypad", "Sweep porch or entryway", "Shake out or vacuum door mat", "Dust shelves, hooks and light switches", "Check lights and replace bulbs"])}
+    ${sec("Outdoor", ["Wipe outdoor table and chairs", "Empty outdoor trash and ashtrays", "Check grill is clean and closed", "Hot tub cover closed, water checked", "Put away cushions and toys"])}
+  </div>${notes}${foot()}</section>`);
+
+pages.push(`<section class="page">${header("Room by room", "Kitchen")}${meta}
+  <div class="cols">
+    ${sec("Surfaces", ["Wipe all counters and backsplash", "Clean and polish sink and faucet", "Wipe cabinet fronts and handles", "Clean stovetop and knobs", "Wipe table and chairs", "Sweep and mop floor"])}
+    ${sec("Appliances", ["Microwave inside and out", "Fridge: remove guest food, wipe shelves", "Oven: check and wipe inside", "Coffee maker: empty, rinse, refill", "Toaster: empty crumb tray", "Dishwasher: empty and put dishes away"])}
+    ${sec("Check & restock", ["All dishes, glasses and cutlery clean", "Coffee, tea, sugar, salt and pepper", "Dish soap, sponge, dishwasher tablets", "Paper towels and trash bags", "Cooking oil and basic spices"])}
+    ${sec("Final touch", ["Trash and recycling emptied, new bags", "Run garbage disposal with water", "Kitchen towel folded and displayed", "Welcome snack or note in place"])}
+  </div>${notes}${foot()}</section>`);
+
+pages.push(`<section class="page">${header("Room by room", "Bathrooms")}${meta}
+  <div class="cols">
+    ${sec("Toilet", ["Clean bowl, under rim and seat", "Wipe tank, base and behind toilet", "Check flush works properly", "Replace toilet paper, spare roll visible"])}
+    ${sec("Shower & tub", ["Scrub walls, tub and shower floor", "Clean glass door or wash curtain", "Remove hair from drains", "Polish faucets and shower head", "Wipe shelves and niches"])}
+    ${sec("Sink & mirror", ["Clean sink, faucet and counter", "Polish mirror streak-free", "Wipe cabinet inside and out", "Empty and clean trash bin"])}
+    ${sec("Restock & finish", ["Fresh towels: bath, hand, face", "Clean bath mat", "Shampoo, conditioner, body wash", "Hand soap and spare toilet paper", "Hair dryer working and tidy", "Sweep and mop floor"])}
+  </div>${notes}${foot()}</section>`);
+
+pages.push(`<section class="page">${header("Room by room", "Bedrooms & living")}${meta}
+  <div class="cols">
+    ${sec("Bedrooms", ["Make beds with fresh linens, hotel corners", "Fluff and arrange pillows and throws", "Check under beds and in drawers", "Dust nightstands, lamps and headboard", "Hangers in closet, extra blanket ready", "Vacuum or mop floor"])}
+    ${sec("Living room", ["Fluff cushions, fold throws", "Dust TV, shelves and decor", "Wipe remotes and light switches", "Vacuum sofa and under cushions", "Arrange books, games and magazines", "Vacuum or mop floor"])}
+    ${sec("Electronics", ["TV on and working, guest accounts logged out", "Remotes have working batteries", "Wi-Fi router on and lights normal", "Chargers and cables in place"])}
+    ${sec("Whole home", ["Windows and sills wiped", "Baseboards and corners checked", "Thermostat set to standard", "No odors, air freshener used lightly", "All lights working"])}
+  </div>${notes}${foot()}</section>`);
+
+pages.push(`<section class="page">${header("Before you lock up", "Final walk-through")}${meta}
+  <div class="cols">
+    ${sec("Final check", ["Every room matches the listing photos", "All beds made, towels displayed", "No hair on floors, sinks or pillows", "All trash taken out to bins", "Laundry finished and stored", "Welcome book in place"])}
+    ${sec("Close up", ["Windows closed and locked", "Lights off, blinds set", "AC or heat set to standard", "Keys or lockbox reset", "Door code ready for next guest", "Front door locked"])}
+  </div>
+  <div class="sec"><h3>Supplies running low</h3>
+    <table><tr><th>Item</th><th class="c">Qty left</th><th>Item</th><th class="c">Qty left</th></tr>
+    ${Array.from({ length: 6 }, () => `<tr><td></td><td class="c"></td><td></td><td class="c"></td></tr>`).join("")}</table></div>
+  ${notes}${foot()}</section>`);
+
+pages.push(`<section class="page">${header("For the host", "Damage & maintenance report")}${meta}
+  <table><tr><th>Room</th><th>Issue found</th><th class="c">Photo</th><th>Action needed</th></tr>
+  ${Array.from({ length: 12 }, () => `<tr><td style="width:1.2in"></td><td></td><td class="c" style="text-align:center">☐</td><td></td></tr>`).join("")}</table>
+  <div class="sec"><h3>Guest left behind</h3>
+  <table><tr><th>Item</th><th>Where found</th><th>Stored at</th></tr>
+  ${Array.from({ length: 4 }, () => `<tr><td></td><td></td><td></td></tr>`).join("")}</table></div>
+  ${foot()}</section>`);
+
+pages.push(`<section class="page">${header("Track every turnover", "Cleaning log")}
+  <div class="meta" style="grid-template-columns:1fr 1fr"><div>Property<i></i></div><div>Month<i></i></div></div>
+  <table><tr><th>Date</th><th>Cleaner</th><th>Time in</th><th>Time out</th><th>Issues?</th><th>Initials</th></tr>
+  ${Array.from({ length: 20 }, () => `<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>`).join("")}</table>
+  ${foot()}</section>`);
+
+document.getElementById("root").innerHTML = pages.join("");
+</script>
+</body>
+</html>

@@ -5,6 +5,7 @@ Kolchi dyal store Etsy kayn f had dossier:
 | Fichier | Achno fih |
 |---|---|
 | `PLAN.md` | Niche, 10 produits, keywords, prix, strategy |
+| `TRAFFIC.md` | Plan 30 yom dyal traffic w sales (Etsy SEO, Pinterest, Reels) |
 | `etsy_api.py` | Script kayrbet m3a Etsy API (listings, images, fichiers, commandes) |
 | `products/<slug>/listing.json` | Titre, description, tags, prix dyal kol produit |
 | `products/<slug>/*.pdf` + `images/` | Fichier li kaytbaa3 + tsawer dyal listing |

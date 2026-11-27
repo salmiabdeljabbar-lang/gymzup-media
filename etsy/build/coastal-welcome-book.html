@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Coastal Welcome Book</title>
+<style>
+@font-face { font-family: "Fraunces"; src: url("node_modules/@fontsource/fraunces/files/fraunces-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "Fraunces"; src: url("node_modules/@fontsource/fraunces/files/fraunces-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Fraunces"; src: url("node_modules/@fontsource/fraunces/files/fraunces-latin-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+@font-face { font-family: "DM Sans"; src: url("node_modules/@fontsource/dm-sans/files/dm-sans-latin-400-normal.woff2") format("woff2"); font-weight: 400; }
+@font-face { font-family: "DM Sans"; src: url("node_modules/@fontsource/dm-sans/files/dm-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "DM Sans"; src: url("node_modules/@fontsource/dm-sans/files/dm-sans-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+:root { --navy: #14324a; --ocean: #1f6f86; --sea: #3d97a6; --foam: #a9d8d2; --sand: #f2dfbf; --shell: #fcf6ec; --coral: #ec6f4f; --sun: #f5b041; --ink: #14324a; --soft: #4d6575; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "DM Sans", sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: var(--pw); height: var(--ph); position: relative; overflow: hidden; page-break-after: always; background: var(--shell); }
+.page:last-child { page-break-after: auto; }
+.pad { position: absolute; inset: 0; padding: 1.55in .7in .75in; display: flex; flex-direction: column; gap: .26in; }
+h1, h2, .display { font-family: "Fraunces", serif; font-weight: 600; letter-spacing: -.01em; line-height: .95; }
+.it { font-family: "Fraunces", serif; font-style: italic; font-weight: 400; }
+.kicker { font-size: 8pt; letter-spacing: .3em; text-transform: uppercase; font-weight: 700; color: var(--coral); }
+p, li { font-size: 10.5pt; line-height: 1.6; color: var(--soft); }
+b, strong { color: var(--ink); font-weight: 700; }
+/* page header band */
+.band { position: absolute; top: 0; left: 0; right: 0; height: 1.3in; }
+.band svg { width: 100%; height: 100%; display: block; }
+.htitle { position: absolute; top: .38in; left: .7in; right: .7in; display: flex; justify-content: space-between; align-items: flex-start; color: var(--shell); }
+.htitle h2 { font-size: 34pt; color: var(--shell); }
+.htitle .kicker { color: var(--sun); margin-bottom: .06in; }
+.htitle .no { font-family: "Fraunces", serif; font-size: 40pt; font-weight: 600; color: transparent; -webkit-text-stroke: 1.3px var(--sun); line-height: 1; }
+.foot { position: absolute; bottom: .32in; left: .7in; right: .7in; display: flex; justify-content: space-between; align-items: center; font-size: 7pt; letter-spacing: .25em; text-transform: uppercase; color: var(--sea); font-weight: 700; }
+.foot svg { width: .9in; height: .12in; }
+/* components */
+.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: .18in; }
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: .16in; }
+.tile { background: #fff; border-radius: 16px; padding: .2in .22in; display: grid; gap: .06in; align-content: start; box-shadow: 0 1px 0 rgba(20,50,74,.06); }
+.tile.navy { background: var(--navy); } .tile.navy p, .tile.navy .lbl { color: var(--foam); } .tile.navy .val { color: var(--shell); }
+.tile.sea { background: var(--foam); }
+.tile.sand { background: var(--sand); }
+.tile.coral { background: var(--coral); } .tile.coral p, .tile.coral .lbl { color: #fde3da; } .tile.coral .val { color: #fff; }
+.ic { width: .42in; height: .42in; }
+.ic * { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.tile .ic { color: var(--coral); } .tile.navy .ic { color: var(--sun); } .tile.coral .ic { color: #fff; }
+.lbl { font-size: 7.5pt; letter-spacing: .22em; text-transform: uppercase; font-weight: 700; color: var(--sea); }
+.val { font-family: "Fraunces", serif; font-size: 22pt; font-weight: 600; line-height: 1.05; color: var(--ink); }
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: .14in .3in; }
+.rule { display: grid; grid-template-columns: .55in 1fr; gap: .08in; align-items: start; padding-bottom: .14in; border-bottom: 1.5px dotted var(--foam); }
+.rule .n { font-family: "Fraunces", serif; font-size: 30pt; font-weight: 600; color: var(--coral); line-height: .9; }
+.rule h4 { font-size: 11pt; color: var(--ink); margin-bottom: 2px; }
+.rule p { font-size: 9.5pt; line-height: 1.45; }
+.how { display: grid; grid-template-columns: .6in 1fr; gap: .14in; align-items: start; }
+.how .ib { width: .6in; height: .6in; border-radius: 50%; background: var(--foam); display: grid; place-items: center; color: var(--navy); }
+.how .ib .ic { width: .32in; height: .32in; }
+.how h4 { font-size: 11.5pt; margin-bottom: 2px; }
+.place { display: grid; grid-template-columns: .38in 1fr auto; gap: .14in; align-items: start; padding: .12in 0; border-bottom: 1.5px dotted var(--foam); }
+.pin { width: .34in; height: .34in; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); background: var(--coral); display: grid; place-items: center; }
+.pin span { transform: rotate(45deg); color: #fff; font-weight: 700; font-size: 9pt; }
+.place h4 { font-family: "Fraunces", serif; font-size: 15pt; font-weight: 600; line-height: 1.1; }
+.place p { font-size: 9.5pt; line-height: 1.45; }
+.place .tag { font-size: 7.5pt; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; color: var(--sea); white-space: nowrap; padding-top: .05in; }
+.photo { background: repeating-linear-gradient(135deg, var(--sand) 0 10px, #f6e8cf 10px 20px); border: 1.5px dashed #d9c39c; display: grid; place-items: center; font-size: 7.5pt; letter-spacing: .2em; text-transform: uppercase; color: #a48a5f; font-weight: 700; text-align: center; }
+.arch { border-radius: 2in 2in 14px 14px; }
+ul.ck { list-style: none; display: grid; gap: .13in; }
+ul.ck li { display: grid; grid-template-columns: .42in 1fr; align-items: center; font-size: 11.5pt; color: var(--ink); }
+ul.ck li::before { content: ""; width: .24in; height: .24in; border-radius: 50%; border: 2px solid var(--coral); }
+.note { background: var(--navy); color: var(--shell); border-radius: 16px; padding: .22in .26in; display: flex; gap: .2in; align-items: center; }
+.note p { color: var(--foam); }
+.note .ic { color: var(--sun); flex: none; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch" result="n"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 .08  0 0 0 0 .2  0 0 0 0 .29  0 0 0 .55 0"/>
+      <feComposite in2="SourceGraphic" operator="in"/>
+    </filter>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f19a74"/><stop offset=".55" stop-color="#f7c99b"/><stop offset="1" stop-color="#fbe7cc"/></linearGradient>
+    <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14324a"/><stop offset="1" stop-color="#1f6f86"/></linearGradient>
+  </defs>
+</svg>
+<div id="root"></div>
+<script>
+const size = new URLSearchParams(location.search).get("size") || "letter";
+document.documentElement.style.setProperty("--pw", size === "a4" ? "210mm" : "8.5in");
+document.documentElement.style.setProperty("--ph", size === "a4" ? "297mm" : "11in");
+const st = document.createElement("style");
+st.textContent = `@page { size: ${size === "a4" ? "A4" : "Letter"}; margin: 0; }`;
+document.head.appendChild(st);
+if (!new URLSearchParams(location.search).get("grain")) { const g = document.createElement("style"); g.textContent = "rect[filter]{display:none}"; document.head.appendChild(g); }
+
+/* ---------- drawing helpers ---------- */
+const wave = (y, amp, len, phase, w = 816, bottom = 1200) => {
+  let d = `M0 ${y}`;
+  for (let x = 0; x <= w + len; x += len / 2) {
+    const k = Math.round(x / (len / 2));
+    const yy = y + (k % 2 ? amp : -amp) * (phase ? -1 : 1);
+    d += ` Q${x - len / 4} ${yy} ${x} ${y}`;
+  }
+  return d + ` L${w + len} ${bottom} L0 ${bottom} Z`;
+};
+const foam = (y, amp, len, w = 816) => {
+  let d = `M0 ${y}`;
+  for (let x = len / 2; x <= w + len; x += len / 2) {
+    const k = Math.round(x / (len / 2));
+    d += ` Q${x - len / 4} ${y + (k % 2 ? amp : -amp)} ${x} ${y}`;
+  }
+  return d;
+};
+const palm = (x, y, s, flip = 1) => `<g transform="translate(${x} ${y}) scale(${s * flip} ${s})">
+  <path d="M0 0 C 6 -60 -6 -130 18 -200" stroke="#14324a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  ${[[-70, -10], [-35, -40], [10, -55], [55, -35], [85, -5], [-60, 25], [70, 30]].map(([dx, dy]) =>
+    `<path d="M18 -200 Q ${18 + dx * .5} ${-200 + dy - 30} ${18 + dx} ${-200 + dy + 20} Q ${18 + dx * .55} ${-200 + dy - 6} 18 -200 Z" fill="#14324a"/>`).join("")}
+</g>`;
+const house = (x, y, s) => `<g transform="translate(${x} ${y}) scale(${s})">
+  <rect x="-6" y="70" width="8" height="40" fill="#14324a"/><rect x="150" y="70" width="8" height="40" fill="#14324a"/><rect x="72" y="70" width="8" height="40" fill="#14324a"/>
+  <rect x="-14" y="62" width="180" height="10" fill="#14324a"/>
+  <rect x="0" y="0" width="152" height="64" fill="#fcf6ec" stroke="#14324a" stroke-width="3"/>
+  ${Array.from({ length: 9 }, (_, i) => `<line x1="0" y1="${7 + i * 6.5}" x2="152" y2="${7 + i * 6.5}" stroke="#e4d6bd" stroke-width="1.4"/>`).join("")}
+  <path d="M-16 4 L76 -46 L168 4 Z" fill="#ec6f4f" stroke="#14324a" stroke-width="3" stroke-linejoin="round"/>
+  <rect x="62" y="-22" width="28" height="20" fill="#fcf6ec" stroke="#14324a" stroke-width="2.5"/>
+  <rect x="16" y="16" width="30" height="26" fill="#3d97a6" stroke="#14324a" stroke-width="2.5"/>
+  <rect x="106" y="16" width="30" height="26" fill="#3d97a6" stroke="#14324a" stroke-width="2.5"/>
+  <rect x="62" y="22" width="28" height="42" fill="#14324a"/>
+  <path d="M-14 62 L-14 44 M166 62 L166 44 M-14 44 H166" stroke="#14324a" stroke-width="2.5" fill="none"/>
+  ${Array.from({ length: 13 }, (_, i) => `<line x1="${-14 + i * 15}" y1="44" x2="${-14 + i * 15}" y2="62" stroke="#14324a" stroke-width="2"/>`).join("")}
+</g>`;
+const grass = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})" stroke="#14324a" stroke-width="2.4" fill="none" stroke-linecap="round">
+  <path d="M0 0 Q-4 -30 -16 -52"/><path d="M4 0 Q6 -36 2 -64"/><path d="M8 0 Q16 -28 30 -44"/><path d="M-6 0 Q-16 -18 -32 -26"/></g>`;
+const birds = (x, y) => `<g stroke="#14324a" stroke-width="2.4" fill="none" stroke-linecap="round">
+  <path d="M${x} ${y} q8 -8 16 0 q8 -8 16 0"/><path d="M${x + 50} ${y - 22} q6 -6 12 0 q6 -6 12 0"/></g>`;
+const sun = (cx, cy, r, bg = "#f7c99b") => `<g><circle cx="${cx}" cy="${cy}" r="${r}" fill="#f5b041"/>
+  ${[0.35, 0.5, 0.63, 0.75, 0.86].map((f, i) => `<rect x="${cx - r - 2}" y="${cy - r + f * 2 * r}" width="${2 * r + 4}" height="${3 + i * 1.8}" fill="${bg}"/>`).join("")}</g>`;
+
+/* ---------- the cover scene (816 x 720) ---------- */
+const coverScene = `<svg viewBox="0 0 816 720" preserveAspectRatio="xMidYMid slice">
+  <rect width="816" height="720" fill="url(#sky)"/>
+  ${sun(540, 330, 150, "#f8d2a6")}
+  ${birds(150, 150)}
+  <path d="M0 450 L0 410 C 110 350 250 360 400 450 Z" fill="#1f6f86" opacity=".55"/>
+  <path d="${wave(440, 10, 120, 0)}" fill="#3d97a6"/>
+  <path d="${foam(452, 8, 120)}" stroke="#a9d8d2" stroke-width="2.5" fill="none"/>
+  <path d="${wave(490, 12, 150, 1)}" fill="#1f6f86"/>
+  <path d="${foam(504, 9, 150)}" stroke="#a9d8d2" stroke-width="2.5" fill="none" opacity=".8"/>
+  <path d="${wave(545, 14, 180, 0)}" fill="#14324a"/>
+  <path d="M0 610 C 200 560 420 600 816 560 L816 720 L0 720 Z" fill="#f2dfbf"/>
+  <path d="M0 640 C 260 600 500 640 816 600" stroke="#e2c99d" stroke-width="3" fill="none"/>
+  ${house(520, 488, .95)}
+  ${palm(120, 640, 1.2)}
+  ${palm(200, 650, .85, -1)}
+  ${grass(330, 640)}${grass(470, 650, .8)}${grass(760, 610, .9)}
+  <rect width="816" height="720" filter="url(#grain)" opacity=".5"/>
+</svg>`;
+
+/* header band scene (816 x 125) */
+const bandScene = (variant = 0) => `<svg viewBox="0 0 816 125" preserveAspectRatio="none">
+  <rect width="816" height="125" fill="url(#sky2)"/>
+  <path d="${wave(96, 6, 110, variant % 2, 816, 125)}" fill="#1f6f86"/>
+  <path d="${wave(108, 6, 140, (variant + 1) % 2, 816, 125)}" fill="#3d97a6"/>
+  <path d="${foam(105, 5, 140)}" stroke="#a9d8d2" stroke-width="1.6" fill="none"/>
+  <path d="M0 125 L0 118 ${foam(118, 4, 90).slice(7)} L816 125 Z" fill="#fcf6ec"/>
+  <rect width="816" height="125" filter="url(#grain)" opacity=".35"/>
+</svg>`;
+const squiggle = `<svg viewBox="0 0 90 12"><path d="${foam(6, 4, 15, 90)}" stroke="#3d97a6" stroke-width="1.8" fill="none"/></svg>`;
+
+/* icons */
+const I = {
+  wifi: `<path d="M3 9a13 13 0 0 1 18 0"/><path d="M6 12.5a8.5 8.5 0 0 1 12 0"/><path d="M9 16a4 4 0 0 1 6 0"/><circle cx="12" cy="19" r=".8"/>`,
+  key: `<circle cx="8" cy="12" r="4"/><path d="M12 12h9M18 12v3M21 12v2.5"/>`,
+  clock: `<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/>`,
+  car: `<path d="M4 15v-3l2-5h12l2 5v3"/><path d="M3 15h18v3H3z"/><circle cx="7.5" cy="18" r="1.5"/><circle cx="16.5" cy="18" r="1.5"/>`,
+  phone: `<path d="M6 3h4l1.5 4-2 1.5a10 10 0 0 0 6 6l1.5-2 4 1.5v4a2 2 0 0 1-2 2A17 17 0 0 1 4 5a2 2 0 0 1 2-2z"/>`,
+  lock: `<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15" r="1.2"/>`,
+  tv: `<rect x="3" y="5" width="18" height="12" rx="1.5"/><path d="M8 21h8M12 17v4"/>`,
+  coffee: `<path d="M4 9h12v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M16 11h2a2.5 2.5 0 0 1 0 5h-2.5"/><path d="M8 3c0 1.5 1.5 1.5 1.5 3M12 3c0 1.5 1.5 1.5 1.5 3"/>`,
+  snow: `<path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/><path d="M9.5 4.5 12 7l2.5-2.5M9.5 19.5 12 17l2.5 2.5"/>`,
+  flame: `<path d="M12 3c1 4 6 6 6 11a6 6 0 0 1-12 0c0-3 2-4 2-7 2 1 3 2 4 4 1-2 1-5 0-8z"/>`,
+  washer: `<rect x="4" y="3" width="16" height="18" rx="2"/><circle cx="12" cy="13" r="4.5"/><path d="M7 6.5h.01M10 6.5h4"/>`,
+  tub: `<path d="M3 12h18v2a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/><path d="M6 12V6a2 2 0 0 1 4 0"/><path d="M7 19l-1 2M17 19l1 2"/>`,
+  umbrella: `<path d="M3 11a9 9 0 0 1 18 0z"/><path d="M12 11v8a2 2 0 0 0 4 0"/><path d="M12 2v1"/>`,
+  shell: `<path d="M12 4c5 0 8 4 8 8l-8 8-8-8c0-4 3-8 8-8z"/><path d="M12 4v16M8 6.5 10 19M16 6.5 14 19"/>`,
+  sun: `<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>`,
+  aid: `<rect x="3" y="6" width="18" height="14" rx="2"/><path d="M9 6V4h6v2M12 10v6M9 13h6"/>`,
+  pin: `<path d="M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12z"/><circle cx="12" cy="9" r="2.5"/>`,
+  wave: `<path d="M2 15c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M2 19c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/><path d="M8 10a4 4 0 0 1 8 0"/>`,
+  trash: `<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>`,
+  star: `<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>`,
+};
+const ic = (k, cls = "ic") => `<svg class="${cls}" viewBox="0 0 24 24">${I[k]}</svg>`;
+
+/* ---------- pages ---------- */
+let n = 1;
+const P = (no, kicker, title, body, variant = 0) => `<section class="page">
+  <div class="band">${bandScene(variant)}</div>
+  <div class="htitle"><div><div class="kicker">${kicker}</div><h2>${title}</h2></div><div class="no">${String(no).padStart(2, "0")}</div></div>
+  <div class="pad">${body}</div>
+  <div class="foot"><span>Salt &amp; Sun House</span>${squiggle}<span>Guest guide</span></div></section>`;
+
+const pages = [];
+// 1 cover
+pages.push(`<section class="page" style="background:var(--navy)">
+  <div style="position:absolute;inset:0 0 auto 0;height:7.25in">${coverScene}</div>
+  <div style="position:absolute;left:0;right:0;bottom:0;height:3.75in;padding:.45in .7in;display:flex;flex-direction:column;justify-content:center;gap:.14in;color:var(--shell)">
+    <div class="kicker" style="color:var(--sun)">Guest guide · Est. 2026</div>
+    <h1 style="font-size:58pt;color:var(--shell)">Welcome to<br><span class="it" style="color:var(--sun)">Salt &amp; Sun</span> House</h1>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:.1in">
+      <p style="color:var(--foam);font-size:11pt;max-width:3.6in">Everything you need for slow mornings, salty air and long golden evenings.</p>
+      <div style="font-size:8pt;letter-spacing:.25em;text-transform:uppercase;color:var(--foam);font-weight:700;text-align:right">42 Dune Road<br>Seabrook, CA</div>
+    </div></div></section>`);
+
+// 2 hello
+pages.push(P(2, "Hello & welcome", "Make yourself<br>at home", `
+  <div style="display:grid;grid-template-columns:2.6in 1fr;gap:.4in;align-items:start;margin-top:.15in">
+    <div class="photo arch" style="height:3.3in">Add host photo</div>
+    <div style="display:grid;gap:.14in">
+      <div class="display" style="font-size:28pt">Hi, we're<br><span class="it" style="color:var(--coral)">Maya &amp; Leo</span></div>
+      <p>We fell in love with this little house on the dunes ten summers ago, and now we get to share it with you. This guide has everything you need to settle in, from the Wi-Fi to our favorite taco truck.</p>
+      <p>If anything comes up, day or night, just send us a message. We live ten minutes away and we're always happy to help.</p>
+      <div class="it" style="font-size:22pt;color:var(--ink)">See you on the beach!</div>
+    </div></div>
+  <div class="grid3" style="margin-top:auto">
+    <div class="tile">${ic("phone")}<div class="lbl">Call or text</div><p style="color:var(--ink);font-weight:500">(555) 123-4567</p></div>
+    <div class="tile">${ic("star")}<div class="lbl">Instagram</div><p style="color:var(--ink);font-weight:500">@saltandsunhouse</p></div>
+    <div class="tile">${ic("clock")}<div class="lbl">We reply</div><p style="color:var(--ink);font-weight:500">within 15 minutes</p></div>
+  </div>`));
+
+// 3 quick info
+pages.push(P(3, "The essentials", "At a glance", `
+  <div class="grid2" style="margin-top:.1in">
+    <div class="tile navy">${ic("key")}<div class="lbl">Check-in</div><div class="val">from 4:00 PM</div><p>Self check-in with the smart lock.</p></div>
+    <div class="tile coral">${ic("clock")}<div class="lbl">Check-out</div><div class="val">by 10:00 AM</div><p>See the list on page 11.</p></div>
+  </div>
+  <div class="tile sea" style="grid-template-columns:auto 1fr 1fr;align-items:center;gap:.3in;padding:.28in .3in">
+    <svg class="ic" viewBox="0 0 24 24" style="width:.7in;height:.7in;color:var(--navy)">${I.wifi}</svg>
+    <div><div class="lbl" style="color:var(--navy)">Wi-Fi network</div><div class="val">SaltAndSun</div></div>
+    <div><div class="lbl" style="color:var(--navy)">Password</div><div class="val">goldenhour26</div></div>
+  </div>
+  <div class="grid3">
+    <div class="tile">${ic("lock")}<div class="lbl">Door code</div><div class="val" style="font-size:18pt">Sent day of arrival</div></div>
+    <div class="tile">${ic("car")}<div class="lbl">Parking</div><p>Two cars in the driveway. Street parking is free after 6 PM.</p></div>
+    <div class="tile">${ic("trash")}<div class="lbl">Trash day</div><p>Tuesday morning. Bins live by the side gate.</p></div>
+  </div>
+  <div class="kicker" style="margin-top:.1in">Good to know</div>
+  <div class="grid3">
+    <div class="tile sand">${ic("snow")}<div class="lbl">Thermostat</div><p>Keep it between 68°F and 76°F, please.</p></div>
+    <div class="tile sand">${ic("washer")}<div class="lbl">Extra linens</div><p>Hall closet, top shelf. Pillows in the cedar chest.</p></div>
+    <div class="tile sand">${ic("sun")}<div class="lbl">Quiet hours</div><p>10 PM to 8 AM. Sound carries over the dunes.</p></div>
+  </div>`, 1));
+
+// 4 house rules
+const rules = [["No smoking", "Anywhere inside or on the decks, please."], ["No parties", "Small gatherings only, max 8 people."], ["Quiet hours", "10 PM to 8 AM. Sound travels on the dunes."], ["Sandy feet", "Rinse at the outdoor shower before coming in."], ["Pets", "Welcome with approval. Keep them off the beds."], ["Max 6 guests", "For safety and insurance reasons."], ["Report damage", "Accidents happen. Just let us know."], ["Lock up", "Lock doors and close windows when you head out."]];
+pages.push(P(4, "A few simple things", "House rules", `
+  <p style="max-width:5.6in;margin-top:.1in">We trust you to treat our home like your own. These keep it lovely for you and every guest after you.</p>
+  <div class="rules">${rules.map(([h, p], i) => `<div class="rule"><div class="n">${String(i + 1).padStart(2, "0")}</div><div><h4>${h}</h4><p>${p}</p></div></div>`).join("")}</div>`, 0));
+
+// 5 how things work
+const how = [["tv", "Smart TV", "Use the white remote. Streaming apps are logged in, please log out of your own accounts."], ["coffee", "Coffee", "Pour-over and a French press are in the top drawer. Local beans in the jar."], ["snow", "Air conditioning", "Remote on the bedroom wall. Please switch it off when the doors are open."], ["flame", "Fire pit", "Propane valve on the side. Never leave it burning unattended."], ["washer", "Laundry", "Washer and dryer in the garage. Detergent on the shelf above."], ["tub", "Outdoor shower", "Hot water takes 30 seconds. Turn the handle fully off after use."]];
+pages.push(P(5, "A quick how-to", "How things work", `
+  <div class="grid2" style="gap:.28in .35in;margin-top:.15in">${how.map(([k, h, p]) => `<div class="how"><div class="ib">${ic(k)}</div><div><h4>${h}</h4><p>${p}</p></div></div>`).join("")}</div>
+  <div class="note" style="margin-top:auto">${ic("wave")}<p><b style="color:var(--shell)">Something not working?</b> Text us a photo and we'll walk you through it or send someone over.</p></div>`, 1));
+
+// 6 map
+const pins = [[230, 150], [330, 250], [520, 170], [610, 300], [430, 380], [270, 430], [560, 470], [380, 560]];
+const mapSvg = `<svg viewBox="0 0 720 640" preserveAspectRatio="none" style="width:100%;height:100%;display:block;border-radius:18px">
+  <rect width="720" height="640" fill="#f2dfbf"/>
+  <path d="M0 0 H150 C 190 90 120 170 170 260 C 220 350 140 430 190 520 C 220 580 180 610 200 640 H0 Z" fill="#3d97a6"/>
+  ${[60, 110, 170, 230, 300, 370, 440, 510, 580].map((y, i) => `<path d="M${20 + (i % 2) * 30} ${y} q10 -6 20 0 q10 -6 20 0" stroke="#a9d8d2" stroke-width="2.2" fill="none"/>`).join("")}
+  <path d="M150 0 C 190 90 120 170 170 260 C 220 350 140 430 190 520 C 220 580 180 610 200 640" stroke="#fcf6ec" stroke-width="5" fill="none"/>
+  <path d="M260 0 C 300 160 250 300 330 420 S 420 640 420 640" stroke="#fcf6ec" stroke-width="12" fill="none"/>
+  <path d="M260 0 C 300 160 250 300 330 420 S 420 640 420 640" stroke="#e6cfa6" stroke-width="2" stroke-dasharray="10 8" fill="none"/>
+  <path d="M330 420 C 450 400 560 420 720 380" stroke="#fcf6ec" stroke-width="9" fill="none"/>
+  <path d="M290 200 C 420 210 560 150 720 160" stroke="#fcf6ec" stroke-width="7" fill="none"/>
+  <ellipse cx="600" cy="560" rx="70" ry="40" fill="#a9d8d2"/>
+  ${[[470, 90], [660, 250], [640, 470], [500, 280], [260, 560]].map(([x, y]) => `<g fill="#9fb98a"><circle cx="${x}" cy="${y}" r="14"/><circle cx="${x + 16}" cy="${y + 6}" r="11"/><circle cx="${x - 12}" cy="${y + 8}" r="10"/></g>`).join("")}
+  <g transform="translate(360 300)"><circle r="30" fill="#14324a"/><path d="M-14 4 L0 -10 L14 4 V14 H-14 Z" fill="#f5b041"/></g>
+  ${pins.map(([x, y], i) => `<g transform="translate(${x} ${y})"><path d="M0 0 C -14 -16 -16 -24 -16 -30 A16 16 0 1 1 16 -30 C 16 -24 14 -16 0 0 Z" fill="#ec6f4f" stroke="#fcf6ec" stroke-width="2.5"/><text x="0" y="-26" text-anchor="middle" font-family="DM Sans" font-weight="700" font-size="15" fill="#fff">${i + 1}</text></g>`).join("")}
+  <g transform="translate(640 70)" font-family="DM Sans" font-weight="700" font-size="14" fill="#14324a" text-anchor="middle"><circle r="26" fill="#fcf6ec" stroke="#14324a" stroke-width="2"/><path d="M0 -18 L6 0 L0 18 L-6 0 Z" fill="#ec6f4f"/><text y="-32">N</text></g>
+  <text x="70" y="330" font-family="Fraunces" font-style="italic" font-size="26" fill="#fcf6ec" transform="rotate(-80 70 330)">Pacific Ocean</text>
+  <rect width="720" height="640" filter="url(#grain)" opacity=".3"/>
+</svg>`;
+pages.push(P(6, "Find your way", "The neighborhood", `
+  <div style="height:6.9in;margin-top:.05in">${mapSvg}</div>
+  <p style="font-size:9pt">Edit the pins to match your area. The numbers match the lists on the next two pages.</p>`, 0));
+
+// 7 eat
+const eat = [["Morning Tide Café", "Best breakfast burrito in town. Get there before 9.", "5 min walk"], ["Lupe's Taco Truck", "Fish tacos by the pier, cash only, worth it.", "3 min drive"], ["The Salty Oyster", "Sunset dinner with a view. Book ahead on weekends.", "8 min drive"], ["Scoops & Co.", "Small-batch ice cream. Try the salted honey.", "10 min walk"], ["Harbor Market", "Groceries, local wine and fresh fish.", "5 min drive"]];
+pages.push(P(7, "Our local favorites", "Eat &amp; drink", `
+  <div style="margin-top:.1in">${eat.map(([h, p, t], i) => `<div class="place"><div class="pin"><span>${i + 1}</span></div><div><h4>${h}</h4><p>${p}</p></div><div class="tag">${t}</div></div>`).join("")}</div>
+  <div class="note" style="margin-top:auto">${ic("coffee")}<p><b style="color:var(--shell)">Host tip:</b> grab coffee at Morning Tide and walk the beach path back. Best way to start the day.</p></div>`, 1));
+
+// 8 explore
+const exp = [["Sunset Point", "The best golden hour spot. Bring a blanket.", "6 min"], ["Tide Pools", "Low tide only. Check the times on the next page.", "12 min"], ["Coastal Trail", "Easy 4-mile loop with ocean views all the way.", "15 min"], ["Saturday Market", "Local makers, flowers and pastries, 8 AM to 1 PM.", "10 min"], ["Surf School", "Beginner lessons for all ages. Boards included.", "4 min"]];
+pages.push(P(8, "Things to do", "Explore", `
+  <div style="margin-top:.1in">${exp.map(([h, p, t], i) => `<div class="place"><div class="pin" style="background:var(--sea)"><span>${i + 6 > 8 ? i + 1 : i + 6}</span></div><div><h4>${h}</h4><p>${p}</p></div><div class="tag">${t}</div></div>`).join("")}</div>
+  <div class="grid2" style="margin-top:auto">
+    <div class="photo" style="height:1.5in;border-radius:16px">Add photo</div><div class="photo" style="height:1.5in;border-radius:16px">Add photo</div></div>`, 0));
+
+// 9 beach essentials
+pages.push(P(9, "Made for beach days", "Beach essentials", `
+  <div class="grid3" style="margin-top:.1in">
+    <div class="tile sand">${ic("umbrella")}<div class="lbl">In the garage</div><p>Umbrella, 4 chairs, cooler, boogie boards and sand toys.</p></div>
+    <div class="tile sand">${ic("shell")}<div class="lbl">Beach towels</div><p>Striped towels in the hall basket. Bath towels stay inside, please.</p></div>
+    <div class="tile sand">${ic("sun")}<div class="lbl">Sunscreen</div><p>Reef-safe sunscreen under the bathroom sink. Help yourself.</p></div>
+  </div>
+  <div class="tile navy" style="padding:.3in">
+    <div class="lbl" style="color:var(--sun)">Tide times this week</div>
+    <div style="display:grid;grid-template-columns:repeat(7,1fr);gap:.1in;margin-top:.12in;text-align:center">
+      ${["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"].map(d => `<div style="display:grid;gap:.06in"><div class="lbl">${d}</div><div style="border-bottom:1.5px solid var(--sea);height:.28in"></div><div style="border-bottom:1.5px solid var(--sea);height:.28in"></div></div>`).join("")}
+    </div><p style="margin-top:.1in;font-size:9pt">Write in low and high tide, or scan the QR code on the fridge.</p></div>
+  <div class="grid2">
+    <div class="how"><div class="ib">${ic("wave")}</div><div><h4>Ocean safety</h4><p>Swim near the lifeguard tower. Red flag means no swimming.</p></div></div>
+    <div class="how"><div class="ib">${ic("tub")}</div><div><h4>Rinse off</h4><p>Outdoor shower by the gate. Sandy towels go on the deck rail.</p></div></div>
+  </div>`, 1));
+
+// 10 emergency
+pages.push(P(10, "Just in case", "Emergency info", `
+  <div class="grid2" style="margin-top:.1in">
+    <div class="tile coral">${ic("phone")}<div class="lbl">Emergency</div><div class="val" style="font-size:40pt">911</div><p>Police, fire, ambulance</p></div>
+    <div class="tile navy">${ic("phone")}<div class="lbl">Your hosts</div><div class="val">(555) 123-4567</div><p>Maya &amp; Leo, available 24/7</p></div>
+  </div>
+  <div class="grid2">
+    <div class="tile">${ic("aid")}<div class="lbl">Nearest hospital</div><p><b>Seabrook Medical Center</b><br>1200 Ocean Ave · 12 min drive</p></div>
+    <div class="tile">${ic("pin")}<div class="lbl">Pharmacy</div><p><b>Coastside Pharmacy</b><br>18 Main St · open until 9 PM</p></div>
+  </div>
+  <div class="grid3">
+    <div class="tile sea">${ic("aid")}<div class="lbl" style="color:var(--navy)">First aid kit</div><p style="color:var(--navy)">Under the kitchen sink</p></div>
+    <div class="tile sea">${ic("flame")}<div class="lbl" style="color:var(--navy)">Extinguisher</div><p style="color:var(--navy)">Next to the fridge</p></div>
+    <div class="tile sea">${ic("key")}<div class="lbl" style="color:var(--navy)">Water shut-off</div><p style="color:var(--navy)">Garage, left wall</p></div>
+  </div>`, 0));
+
+// 11 checkout
+pages.push(P(11, "Before you go", "Check-out", `
+  <div style="display:grid;grid-template-columns:1fr 2.3in;gap:.4in;margin-top:.15in;align-items:start">
+    <div><div class="display" style="font-size:24pt;margin-bottom:.2in">By <span class="it" style="color:var(--coral)">10:00 AM</span>, please:</div>
+    <ul class="ck">${["Start the dishwasher", "Take trash to the bins by the gate", "Leave used towels in the tub", "Return beach gear to the garage", "Turn off AC, lights and fire pit", "Close and lock all windows", "Lock the door, the code resets itself"].map(x => `<li>${x}</li>`).join("")}</ul></div>
+    <div class="tile sand" style="padding:.3in .26in;gap:.12in">${ic("shell")}<div class="display" style="font-size:18pt">No need to strip the beds</div><p>Our cleaning crew takes care of the linens. Just leave the place as you would a friend's.</p></div>
+  </div>`, 1));
+
+// 12 thank you
+const sunset = `<svg viewBox="0 0 816 520" preserveAspectRatio="xMidYMid slice" style="width:100%;height:100%;display:block">
+  <rect width="816" height="520" fill="url(#sky)"/>${sun(408, 330, 170, "#f8d2a6")}${birds(560, 120)}
+  <path d="${wave(330, 10, 130, 0, 816, 520)}" fill="#3d97a6"/><path d="${foam(342, 8, 130)}" stroke="#a9d8d2" stroke-width="2.5" fill="none"/>
+  <path d="${wave(380, 12, 160, 1, 816, 520)}" fill="#1f6f86"/><path d="${wave(440, 14, 200, 0, 816, 520)}" fill="#14324a"/>
+  ${palm(90, 520, 1.3)}${palm(740, 520, 1.1, -1)}
+  <rect width="816" height="520" filter="url(#grain)" opacity=".5"/></svg>`;
+pages.push(`<section class="page" style="background:var(--navy)">
+  <div style="position:absolute;inset:0 0 auto 0;height:5.4in">${sunset}</div>
+  <div style="position:absolute;left:.7in;right:.7in;bottom:.6in;top:5.7in;display:flex;flex-direction:column;gap:.18in;color:var(--shell)">
+    <div class="kicker" style="color:var(--sun)">Until next summer</div>
+    <h1 style="font-size:48pt;color:var(--shell)">Thank you for<br><span class="it" style="color:var(--sun)">staying with us</span></h1>
+    <div style="display:flex;gap:.35in;align-items:center;margin-top:.1in">
+      <div style="width:1.25in;height:1.25in;border-radius:12px;background:var(--shell);display:grid;place-items:center;font-size:7pt;letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--navy);text-align:center">Add your<br>QR code</div>
+      <p style="color:var(--foam);max-width:4in">Loved your stay? A five-star review means the world to a small family business like ours. Scan to leave one, or to book your next trip directly.</p>
+    </div>
+    <div style="display:flex;gap:6px;color:var(--sun);margin-top:auto">${Array.from({ length: 5 }, () => `<svg viewBox="0 0 24 24" style="width:.3in;height:.3in;fill:var(--sun)"><path d="${"m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"}"/></svg>`).join("")}</div>
+  </div></section>`);
+
+document.getElementById("root").innerHTML = pages.join("");
+</script>
+</body>
+</html>

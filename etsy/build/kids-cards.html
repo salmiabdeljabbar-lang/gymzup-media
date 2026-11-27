@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Kids Valentine Cards</title>
+<style>
+@font-face { font-family: "Baloo"; src: url("node_modules/@fontsource/baloo-2/files/baloo-2-latin-700-normal.woff2") format("woff2"); font-weight: 700; }
+@font-face { font-family: "Baloo"; src: url("node_modules/@fontsource/baloo-2/files/baloo-2-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "DM Sans"; src: url("node_modules/@fontsource/dm-sans/files/dm-sans-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+:root { --ink: #3b2430; --red: #ef3e5c; --pink: #ffb3c6; --blue: #6cc4f0; --yellow: #ffd23f; --green: #7bd389; --orange: #ff9f45; --purple: #b68cf0; --brown: #c98a5a; --grey: #b9b4c2; --cream: #fff; --cheek: #ff8fab; --bgcard: #fff5f8; --muzzle: #fff3e6; }
+.bw { --red: #fff; --pink: #fff; --blue: #fff; --yellow: #fff; --green: #fff; --orange: #fff; --purple: #fff; --brown: #fff; --grey: #fff; --cheek: #fff; --bgcard: #fff; --muzzle: #fff; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "DM Sans", sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: var(--pw); height: var(--ph); position: relative; overflow: hidden; page-break-after: always; background: #fff; }
+.page:last-child { page-break-after: auto; }
+.grid { position: absolute; inset: 0.4in; display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: repeat(4, minmax(0, 1fr)); }
+.cell { padding: 0.12in; position: relative; min-height: 0; border-right: 1.3px dashed #d7c3cc; border-bottom: 1.3px dashed #d7c3cc; }
+.cell:nth-child(2n) { border-right: 0; }
+.cell:nth-last-child(-n+2) { border-bottom: 0; }
+.card { height: 100%; border-radius: 16px; background: var(--bgcard); border: 2.5px solid var(--ink); display: grid; grid-template-columns: 44% 56%; align-items: center; overflow: hidden; position: relative; min-height: 0; height: 100%; }
+.bw .card { background: #fff; }
+.card svg.char { width: 100%; height: auto; max-height: 100%; aspect-ratio: 1; padding: 6px; display: block; }
+.card svg.char * { stroke: var(--ink); stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
+.card svg.char .nofill { fill: none; }
+.card svg.char .ink { fill: var(--ink); stroke: none; }
+.text { padding: 0 12px 0 2px; display: grid; gap: 6px; }
+.pun { font-family: "Baloo"; font-weight: 700; font-size: 19pt; line-height: 1.02; color: var(--red); }
+.bw .pun { color: var(--ink); }
+.tf { display: grid; gap: 4px; font-family: "Baloo"; font-weight: 500; font-size: 10.5pt; }
+.tf span { display: flex; gap: 6px; align-items: flex-end; }
+.tf i { flex: 1; border-bottom: 1.5px solid var(--ink); height: 1.05em; }
+.bw .colorme { position: absolute; top: 6px; right: 10px; font-family: "Baloo"; font-weight: 500; font-size: 7.5pt; letter-spacing: .1em; text-transform: uppercase; }
+.foot { position: absolute; bottom: 0.14in; left: 0; right: 0; text-align: center; font-size: 7pt; letter-spacing: .1em; text-transform: uppercase; color: #c0a9b4; }
+/* how-to */
+.howto { padding: 1in 0.9in; display: grid; align-content: center; gap: 0.35in; }
+.howto h1 { font-family: "Baloo"; font-weight: 700; font-size: 46pt; color: var(--red); line-height: 1; }
+.howto .sub { font-family: "Baloo"; font-weight: 500; font-size: 18pt; }
+.howto ol { list-style: none; display: grid; gap: .2in; counter-reset: s; }
+.howto li { counter-increment: s; display: grid; grid-template-columns: .5in 1fr; gap: .15in; font-size: 14pt; line-height: 1.45; align-items: start; }
+.howto li::before { content: counter(s); font-family: "Baloo"; font-weight: 700; width: .42in; height: .42in; border-radius: 50%; display: grid; place-items: center; background: var(--red); color: #fff; }
+.howto .row { display: flex; gap: .2in; }
+.howto .row svg { width: 1.2in; height: 1.2in; }
+.howto .row svg * { stroke: var(--ink); stroke-width: 2.6; stroke-linejoin: round; stroke-linecap: round; }
+.howto .row svg .nofill { fill: none; } .howto .row svg .ink { fill: var(--ink); stroke: none; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+const size = new URLSearchParams(location.search).get("size") || "letter";
+document.documentElement.style.setProperty("--pw", size === "a4" ? "210mm" : "8.5in");
+document.documentElement.style.setProperty("--ph", size === "a4" ? "297mm" : "11in");
+const st = document.createElement("style");
+st.textContent = `@page { size: ${size === "a4" ? "A4" : "Letter"}; margin: 0; }`;
+document.head.appendChild(st);
+
+const HEART = "M12 21s-7.5-4.6-10-9.3C.4 8.4 2.2 4.5 6 4.5c2.2 0 3.6 1.3 6 3.6 2.4-2.3 3.8-3.6 6-3.6 3.8 0 5.6 3.9 4 7.2C19.5 16.4 12 21 12 21z";
+const heart = (x, y, s, fill = "var(--red)") => `<path d="${HEART}" transform="translate(${x} ${y}) scale(${s})" style="fill:${fill};stroke-width:${(2.6/s).toFixed(2)}"/>`;
+const face = (cx, cy, sp = 9) => `
+  <circle class="ink" cx="${cx - sp}" cy="${cy}" r="2.6"/><circle class="ink" cx="${cx + sp}" cy="${cy}" r="2.6"/>
+  <circle cx="${cx - sp - 1}" cy="${cy - 1}" r=".9" style="fill:#fff;stroke:none"/><circle cx="${cx + sp - 1}" cy="${cy - 1}" r=".9" style="fill:#fff;stroke:none"/>
+  <ellipse cx="${cx - sp - 4}" cy="${cy + 6}" rx="3.2" ry="2" style="fill:var(--cheek);stroke:none"/><ellipse cx="${cx + sp + 4}" cy="${cy + 6}" rx="3.2" ry="2" style="fill:var(--cheek);stroke:none"/>
+  <path class="nofill" d="M${cx - 4} ${cy + 5} q4 4 8 0" style="stroke-width:2.2"/>`;
+
+const chars = {
+  dino: `<svg class="char" viewBox="0 0 100 100">
+    <path d="M30 40 l5 -9 l5 9 z M42 34 l5 -9 l5 9 z M54 34 l5 -9 l5 9 z M65 40 l5 -8 l4 10 z" style="fill:var(--orange)"/>
+    <path d="M18 70 Q12 82 4 80 Q14 88 28 78 Z" style="fill:var(--green)"/>
+    <ellipse cx="50" cy="62" rx="32" ry="26" style="fill:var(--green)"/>
+    <ellipse cx="50" cy="70" rx="18" ry="13" style="fill:var(--yellow)"/>
+    <rect x="30" y="80" width="11" height="12" rx="5" style="fill:var(--green)"/><rect x="59" y="80" width="11" height="12" rx="5" style="fill:var(--green)"/>
+    ${face(50, 54, 10)}
+    ${heart(68, 66, 1.05)}</svg>`,
+  rocket: `<svg class="char" viewBox="0 0 100 100">
+    <path d="M42 80 Q50 98 58 80 Z" style="fill:var(--orange)"/>
+    <path d="M36 62 L22 80 L38 76 Z M64 62 L78 80 L62 76 Z" style="fill:var(--red)"/>
+    <path d="M50 6 C70 22 70 60 62 80 L38 80 C30 60 30 22 50 6 Z" style="fill:var(--blue)"/>
+    <circle cx="50" cy="44" r="15" style="fill:#fff"/>
+    ${face(50, 42, 6)}
+    <circle cx="16" cy="20" r="2.5" style="fill:var(--yellow)"/><circle cx="84" cy="30" r="2" style="fill:var(--yellow)"/><circle cx="82" cy="12" r="1.6" style="fill:var(--yellow)"/>
+    ${heart(10, 40, .8)}</svg>`,
+  cat: `<svg class="char" viewBox="0 0 100 100">
+    <path d="M24 34 L28 10 L44 26 Z M76 34 L72 10 L56 26 Z" style="fill:var(--orange)"/>
+    <path d="M28 30 L30 18 L38 27 Z M72 30 L70 18 L62 27 Z" style="fill:var(--pink)"/>
+    <ellipse cx="50" cy="50" rx="30" ry="26" style="fill:var(--orange)"/>
+    ${face(50, 46, 11)}
+    <path class="nofill" d="M18 50 h12 M18 57 l12 -3 M82 50 h-12 M82 57 l-12 -3" style="stroke-width:1.8"/>
+    <ellipse cx="50" cy="88" rx="22" ry="10" style="fill:var(--orange)"/>
+    ${heart(37, 70, 1.1)}</svg>`,
+  bee: `<svg class="char" viewBox="0 0 100 100">
+    <ellipse cx="36" cy="30" rx="13" ry="17" transform="rotate(-25 36 30)" style="fill:#fff"/>
+    <ellipse cx="64" cy="30" rx="13" ry="17" transform="rotate(25 64 30)" style="fill:#fff"/>
+    <path class="nofill" d="M42 22 Q38 10 32 8 M58 22 Q62 10 68 8"/>
+    <circle cx="32" cy="8" r="3" class="ink"/><circle cx="68" cy="8" r="3" class="ink"/>
+    <ellipse cx="50" cy="60" rx="30" ry="27" style="fill:var(--yellow)"/>
+    <path d="M24 68 Q50 76 76 68 L74 76 Q50 84 26 76 Z" class="ink"/>
+    <path d="M30 82 Q50 90 70 82 L64 86 Q50 92 36 86 Z" class="ink"/>
+    ${face(50, 52, 10)}</svg>`,
+  pizza: `<svg class="char" viewBox="0 0 100 100">
+    <path d="M14 18 Q50 4 86 18 L50 94 Z" style="fill:var(--yellow)"/>
+    <path d="M12 14 Q50 -2 88 14 L86 22 Q50 8 14 22 Z" style="fill:var(--brown)"/>
+    <circle cx="30" cy="32" r="6" style="fill:var(--red)"/><circle cx="68" cy="30" r="6" style="fill:var(--red)"/><circle cx="52" cy="72" r="5" style="fill:var(--red)"/>
+    ${face(50, 44, 9)}</svg>`,
+  rock: `<svg class="char" viewBox="0 0 100 100">
+    <path d="M16 74 C8 50 22 24 46 22 C70 18 92 40 86 68 C84 82 70 88 50 88 C32 88 20 86 16 74 Z" style="fill:var(--grey)"/>
+    <path class="nofill" d="M30 36 l6 4 M70 34 l-4 6 M74 70 l6 -2" style="stroke-width:2"/>
+    ${face(50, 56, 11)}
+    <path d="M22 10 l4 8 M14 22 l8 2 M78 10 l-4 8 M86 22 l-8 2" class="nofill" style="stroke-width:2.4"/>
+    </svg>`,
+  bear: `<svg class="char" viewBox="0 0 100 100">
+    <circle cx="26" cy="24" r="11" style="fill:var(--brown)"/><circle cx="74" cy="24" r="11" style="fill:var(--brown)"/>
+    <circle cx="26" cy="24" r="5" style="fill:var(--pink)"/><circle cx="74" cy="24" r="5" style="fill:var(--pink)"/>
+    <circle cx="50" cy="48" r="30" style="fill:var(--brown)"/>
+    <ellipse cx="50" cy="58" rx="13" ry="10" style="fill:var(--muzzle)"/>
+    <circle class="ink" cx="39" cy="44" r="2.6"/><circle class="ink" cx="61" cy="44" r="2.6"/>
+    <ellipse class="ink" cx="50" cy="54" rx="4" ry="3"/>
+    <path class="nofill" d="M46 60 q4 4 8 0" style="stroke-width:2.2"/>
+    <ellipse cx="32" cy="54" rx="3.2" ry="2" style="fill:var(--cheek);stroke:none"/><ellipse cx="68" cy="54" rx="3.2" ry="2" style="fill:var(--cheek);stroke:none"/>
+    ${heart(36, 72, 1.15)}</svg>`,
+  heart: `<svg class="char" viewBox="0 0 100 100">
+    <path class="nofill" d="M16 56 Q6 50 8 40 M84 56 Q94 50 92 40"/>
+    ${heart(10, 6, 3.4)}
+    <circle class="ink" cx="40" cy="44" r="2.8"/><circle class="ink" cx="60" cy="44" r="2.8"/>
+    <circle cx="39" cy="43" r="1" style="fill:#fff;stroke:none"/><circle cx="59" cy="43" r="1" style="fill:#fff;stroke:none"/>
+    <path d="M44 52 q6 7 12 0 z" style="fill:#fff"/>
+    <ellipse cx="32" cy="52" rx="3.4" ry="2.2" style="fill:var(--pink);stroke:none"/><ellipse cx="68" cy="52" rx="3.4" ry="2.2" style="fill:var(--pink);stroke:none"/>
+    <path class="nofill" d="M40 82 v12 M60 82 v12"/></svg>`,
+};
+const cards = [
+  ["dino", "You're Dino\u2011mite!"],
+  ["rocket", "You're out of this world!"],
+  ["cat", "You're purr\u2011fect!"],
+  ["bee", "Bee mine, Valentine!"],
+  ["pizza", "You've got a pizza my heart!"],
+  ["rock", "You rock, Valentine!"],
+  ["bear", "Have a beary sweet day!"],
+  ["heart", "You make my heart smile!"],
+];
+const foot = `<div class="foot">Kids Valentine Cards · Printable · Personal & classroom use</div>`;
+const sheet = (bw) => `<section class="page ${bw ? "bw" : ""}"><div class="grid">` + cards.map(([c, pun]) => `
+  <div class="cell"><div class="card">${bw ? `<div class="colorme">Color me!</div>` : ""}
+    ${chars[c]}
+    <div class="text"><div class="pun">${pun}</div>
+      <div class="tf"><span>To:<i></i></span><span>From:<i></i></span></div></div>
+  </div></div>`).join("") + `</div>${foot}</section>`;
+
+let html = `<section class="page howto">
+  <div class="row">${chars.dino}${chars.bee}${chars.heart}</div>
+  <h1>Kids Valentine Cards</h1>
+  <div class="sub">8 punny cards · full color + color-your-own</div>
+  <ol>
+    <li>Print pages 2 and 3 at 100% scale on card stock or regular paper. Print as many copies as your class needs.</li>
+    <li>Cut along the dashed lines (8 cards per page).</li>
+    <li>Write the names on the To / From lines. Kids can color the black and white version themselves.</li>
+    <li>Tape a lollipop, pencil or sticker to the back for an extra treat.</li>
+  </ol>
+  ${foot}</section>`;
+html += sheet(false) + sheet(true);
+document.getElementById("root").innerHTML = html;
+</script>
+</body>
+</html>

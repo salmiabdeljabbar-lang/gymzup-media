@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Cormorant Garamond"; src: url("node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-500-normal.woff2") format("woff2"); font-weight: 500; }
+@font-face { font-family: "Montserrat"; src: url("node_modules/@fontsource/montserrat/files/montserrat-latin-600-normal.woff2") format("woff2"); font-weight: 600; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Montserrat", sans-serif; color: #2f2d29; }
+.img { width: 2000px; height: 1500px; position: relative; overflow: hidden; background: #e9e0d3; }
+.sheet { position: absolute; background: #fff; box-shadow: 0 30px 60px rgba(47,45,41,.22), 0 6px 14px rgba(47,45,41,.1); }
+.sheet img { width: 100%; display: block; }
+.serif { font-family: "Cormorant Garamond", serif; font-weight: 500; line-height: .95; }
+.eyebrow { font-size: 30px; letter-spacing: .3em; text-transform: uppercase; color: #6b6f58; font-weight: 600; }
+.pill { display: inline-block; border: 3px solid #2f2d29; border-radius: 999px; padding: 12px 32px; font-size: 32px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; }
+.pill.dark { background: #6b6f58; border-color: #6b6f58; color: #fff; }
+ul.inc { list-style: none; display: grid; gap: 22px; font-size: 34px; }
+ul.inc li { display: flex; gap: 22px; align-items: center; }
+ul.inc li::before { content: ""; width: 14px; height: 14px; border-radius: 50%; background: #6b6f58; flex: none; }
+.steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 50px; }
+.step { background: #f6f1ea; padding: 60px 50px; display: grid; gap: 22px; align-content: start; }
+.step b { font-family: "Cormorant Garamond", serif; font-weight: 500; font-size: 120px; color: #6b6f58; line-height: 1; }
+.step h3 { font-size: 34px; letter-spacing: .14em; text-transform: uppercase; }
+.step p { font-size: 32px; line-height: 1.5; color: #6e675d; }
+</style>
+</head>
+<body>
+<!-- 1 thumbnail -->
+<section class="img" id="w1">
+  <div style="position:absolute;left:120px;top:250px;width:780px;display:grid;gap:40px">
+    <div class="eyebrow">Editable template</div>
+    <div class="serif" style="font-size:170px">Welcome<br>Book</div>
+    <div class="serif" style="font-size:58px;font-style:italic;color:#6e675d">for vacation rental hosts</div>
+    <div style="display:flex;gap:18px;flex-wrap:wrap"><span class="pill dark">Edit in Canva</span><span class="pill">12 pages</span></div>
+  </div>
+  <div class="sheet" style="width:560px;left:1380px;top:160px;transform:rotate(6deg)"><img src="out/welcome-book/pages/page-5.png"></div>
+  <div class="sheet" style="width:580px;left:1180px;top:230px;transform:rotate(1deg)"><img src="out/welcome-book/pages/page-4.png"></div>
+  <div class="sheet" style="width:580px;left:950px;top:320px;transform:rotate(-6deg)"><img src="out/welcome-book/pages/page-1.png"></div>
+</section>
+<!-- 2 included -->
+<section class="img" id="w2" style="background:#f6f1ea">
+  <div style="position:absolute;left:110px;top:200px;display:grid;gap:50px;width:640px">
+    <div class="serif" style="font-size:96px">Everything your guests need</div>
+    <ul class="inc"><li>Welcome & host note</li><li>Check-in / check-out</li><li>Wi-Fi & essentials</li><li>House rules</li><li>How things work</li><li>Emergency info</li><li>Where to eat · Things to do</li><li>Check-out checklist · Review page</li></ul>
+  </div>
+  <div style="position:absolute;right:90px;top:150px;display:grid;grid-template-columns:repeat(4,240px);gap:22px">
+    ${PAGES}
+  </div>
+</section>
+<!-- 3 steps -->
+<section class="img" id="w3">
+  <div style="position:absolute;left:120px;right:120px;top:220px;display:grid;gap:80px">
+    <div style="text-align:center;display:grid;gap:24px"><div class="eyebrow">Ready in minutes</div><div class="serif" style="font-size:120px">Easy to customize</div></div>
+    <div class="steps">
+      <div class="step"><b>1</b><h3>Open in Canva</h3><p>Click the template link in your PDF. A free Canva account is all you need.</p></div>
+      <div class="step"><b>2</b><h3>Make it yours</h3><p>Change the text, colors and fonts. Drag in your own photos.</p></div>
+      <div class="step"><b>3</b><h3>Print or share</h3><p>Download as PDF to print, or send the digital link to guests.</p></div>
+    </div>
+  </div>
+</section>
+<!-- 4 close-up -->
+<section class="img" id="w4" style="background:#f6f1ea">
+  <div class="sheet" style="width:760px;left:180px;top:150px"><img src="out/welcome-book/pages/page-6.png"></div>
+  <div class="sheet" style="width:760px;left:1060px;top:150px"><img src="out/welcome-book/pages/page-9.png"></div>
+</section>
+<script>
+const s = document.getElementById("w2");
+s.innerHTML = s.innerHTML.replace("${PAGES}", Array.from({ length: 12 }, (_, i) => `<div class="sheet" style="position:relative;width:240px"><img src="out/welcome-book/pages/page-${i + 1}.png"></div>`).join(""));
+</script>
+</body>
+</html>
